@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <!-- Sitio estático: compatible con GitHub Pages, sin servicios de backend. -->
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="#0c2638" name="theme-color"/>
+  <title>
+   Middleware | Java ↔ C por TCP
+  </title>
+  <link href="styles.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <header class="nav" id="topbar">
+   <a class="brand" href="#inicio">
+    <span class="brandmark">
+     ↔
+    </span>
+    MIDDLEWARE
+    <small>
+     JAVA · TCP · C
+    </small>
+   </a>
+   <button aria-expanded="false" aria-label="Abrir menú" class="mobile-toggle" id="mobileToggle">
+    ☰
+   </button>
+   <nav aria-label="Secciones" id="navigation">
+    <a href="#inicio">
+     Inicio
+    </a>
+    <a href="#contexto">
+     Contexto
+    </a>
+    <a href="#arquitectura">
+     Arquitectura
+    </a>
+    <a href="#protocolo">
+     Protocolo
+    </a>
+    <a href="#addition">
+     Addition
+    </a>
+    <a href="#greatest">
+     Greatest
+    </a>
+    <a href="#codigo">
+     Código
+    </a>
+    <a href="#cierre">
+     Cierre
+    </a>
+   </nav>
+   <button class="mode-btn" id="presentationBtn" title="Alternar modo presentación">
+    ◧
+    <span>
+     Presentar
+    </span>
+   </button>
+  </header>
+  <main>
+   <section class="section hero" id="inicio">
+    <div class="container hero-grid">
+     <div class="reveal">
+      <span class="eyebrow">
+       <span class="pulse">
+       </span>
+       SISTEMAS DISTRIBUIDOS · PROYECTO FINAL
+      </span>
+      <h1>
+       Dos lenguajes.
+       <br/>
+       <em>
+        Una comunicación.
+       </em>
+      </h1>
+      <p class="lead">
+       Presentación del sistema cliente-servidor: Java solicita operaciones a C mediante sockets TCP y un protocolo binario compartido.
+      </p>
+      <div class="hero-actions">
+       <a class="btn primary" href="#contexto">
+        Explorar presentación
+        <span>
+         ↘
+        </span>
+       </a>
+       <a class="btn ghost" href="#arquitectura">
+        Ver arquitectura ↗
+       </a>
+      </div>
+      <div class="hero-meta">
+       <span>
+        JAVA CLIENT
+       </span>
+       <span class="meta-dot">
+       </span>
+       <span>
+        TCP / IP
+       </span>
+       <span class="meta-dot">
+       </span>
+       <span>
+        C SERVER
+       </span>
+      </div>
+      <div class="team-panel">
+       <span class="team-kicker">
+        INTEGRANTES DEL EQUIPO
+       </span>
+       <ul class="team-list">
+        <li>
+         Daniel Alejandro Guerrero Lopez
+        </li>
+        <li>
+         Carlos Manuel Villasenor Vazquez
+        </li>
+        <li>
+         Jose Manuel Nava Cervantes
+        </li>
+        <li>
+         Anastacio Favian Flores Lira
+        </li>
+       </ul>
+      </div>
+     </div>
+     <div aria-label="Esquema animado de comunicación entre Java y C" class="hero-visual reveal">
+      <div class="orbit orbit-one">
+      </div>
+      <div class="orbit orbit-two">
+      </div>
+      <div class="terminal-node node-java">
+       <div class="node-icon">
+        J
+       </div>
+       <strong>
+        Java
+       </strong>
+       <small>
+        CLIENTE
+       </small>
+      </div>
+      <div class="link-line">
+       <span class="packet p1">
+       </span>
+       <span class="packet p2">
+       </span>
+       <span class="packet p3">
+       </span>
+      </div>
+      <div class="terminal-node node-c">
+       <div class="node-icon">
+        C
+       </div>
+       <strong>
+        C
+       </strong>
+       <small>
+        SERVIDOR
+       </small>
+      </div>
+      <div class="visual-label">
+       SOLICITUD
+       <span>
+        →
+       </span>
+       RESPUESTA
+      </div>
+     </div>
+    </div>
+    <div class="scroll-hint">
+     DESPLAZA PARA EXPLORAR
+     <span>
+      ↓
+     </span>
+    </div>
+   </section>
+   <section class="section light" id="contexto">
+    <div class="container">
+     <div class="section-heading reveal">
+      <span class="eyebrow dark">
+       01 / FUNDAMENTOS
+      </span>
+      <h2>
+       ¿Por qué hablamos de
+       <em>
+        middleware
+       </em>
+       ?
+      </h2>
+      <p>
+       Los sistemas distribuidos conectan componentes independientes. Para colaborar, necesitan intercambiar información de forma comprensible para ambos.
+      </p>
+     </div>
+     <div class="cards three">
+      <article class="info-card reveal">
+       <div class="card-num">
+        01
+       </div>
+       <div class="card-icon">
+        ▦
+       </div>
+       <h3>
+        Sistema distribuido
+       </h3>
+       <p>
+        Varios programas o equipos cooperan mediante mensajes, aunque se ejecuten de manera independiente.
+       </p>
+      </article>
+      <article class="info-card reveal">
+       <div class="card-num">
+        02
+       </div>
+       <div class="card-icon">
+        ⇄
+       </div>
+       <h3>
+        Interoperabilidad
+       </h3>
+       <p>
+        Java y C tienen estructuras diferentes, pero pueden entenderse si acuerdan cómo representar los datos.
+       </p>
+      </article>
+      <article class="info-card reveal">
+       <div class="card-num">
+        03
+       </div>
+       <div class="card-icon">
+        ⌁
+       </div>
+       <h3>
+        Middleware y TCP
+       </h3>
+       <p>
+        La comunicación mediante sockets ofrece un mecanismo básico para construir servicios remotos entre ambos programas.
+       </p>
+      </article>
+     </div>
+     <p class="note reveal">
+      Precisión conceptual: este proyecto demuestra mecanismos de comunicación usados para construir middleware; no implementa una plataforma completa de middleware.
+     </p>
+    </div>
+   </section>
+   <section class="section navy" id="arquitectura">
+    <div class="container">
+     <div class="section-heading reveal">
+      <span class="eyebrow">
+       02 / ARQUITECTURA
+      </span>
+      <h2>
+       Un cliente solicita.
+       <br/>
+       <em>
+        Un servidor resuelve.
+       </em>
+      </h2>
+      <p>
+       La interfaz captura datos, pero los cálculos se realizan exclusivamente en el servidor C.
+      </p>
+     </div>
+     <div class="architecture reveal">
+      <div class="arch-box">
+       <div class="arch-label">
+        01 · CLIENTE
+       </div>
+       <div class="arch-logo">
+        JAVA
+       </div>
+       <h3>
+        Client_v1_0.java
+       </h3>
+       <p>
+        Menú, captura de matrices y vectores, envío de datos y visualización del resultado.
+       </p>
+       <div class="arch-tag">
+        DataOutputStream
+       </div>
+       <div class="arch-tag">
+        DataInputStream
+       </div>
+      </div>
+      <div class="arch-middle">
+       <div class="arch-flow">
+        <span>
+         →
+        </span>
+        <small>
+         SOLICITUD BINARIA
+        </small>
+       </div>
+       <div class="tcp-pill">
+        TCP · PUERTO 5000
+       </div>
+       <div class="arch-flow return">
+        <span>
+         ←
+        </span>
+        <small>
+         RESPUESTA BINARIA
+        </small>
+       </div>
+      </div>
+      <div class="arch-box server">
+       <div class="arch-label">
+        02 · SERVIDOR
+       </div>
+       <div class="arch-logo">
+        C
+       </div>
+       <h3>
+        server_v1.0.c
+       </h3>
+       <p>
+        Recibe bytes, reconstruye los números, ejecuta la operación y devuelve el resultado.
+       </p>
+       <div class="arch-tag">
+        socket / accept
+       </div>
+       <div class="arch-tag">
+        addition / greatest
+       </div>
+      </div>
+     </div>
+     <div class="mini-flow reveal">
+      <span>
+       Elegir operación
+      </span>
+      <b>
+       →
+      </b>
+      <span>
+       Enviar datos
+      </span>
+      <b>
+       →
+      </b>
+      <span>
+       Calcular en C
+      </span>
+      <b>
+       →
+      </b>
+      <span>
+       Mostrar resultado
+      </span>
+     </div>
+    </div>
+   </section>
+   <section class="section light" id="protocolo">
+    <div class="container">
+     <div class="section-heading reveal">
+      <span class="eyebrow dark">
+       03 / COMUNICACIÓN
+      </span>
+      <h2>
+       ¿Cómo viajan
+       <em>
+        los datos
+       </em>
+       ?
+      </h2>
+      <p>
+       TCP transporta bytes. Java y C deben interpretar la misma secuencia con el mismo orden y formato.
+      </p>
+     </div>
+     <div class="protocol-grid">
+      <div class="protocol-panel reveal">
+       <div class="panel-title">
+        PETICIÓN · ADDITION
+       </div>
+       <div class="byte-row">
+        <div class="byte-box operation">
+         <small>
+          INT32
+         </small>
+         <strong>
+          1
+         </strong>
+         <span>
+          Operación
+         </span>
+        </div>
+        <div class="byte-box">
+         <small>
+          INT32
+         </small>
+         <strong>
+          N
+         </strong>
+         <span>
+          Dimensión
+         </span>
+        </div>
+        <div class="byte-box wide">
+         <small>
+          FLOAT32 × N²
+         </small>
+         <strong>
+          Matriz A
+         </strong>
+         <span>
+          Fila por fila
+         </span>
+        </div>
+        <div class="byte-box wide">
+         <small>
+          FLOAT32 × N²
+         </small>
+         <strong>
+          Matriz B
+         </strong>
+         <span>
+          Fila por fila
+         </span>
+        </div>
+       </div>
+       <div class="panel-title second">
+        RESPUESTA
+       </div>
+       <div class="byte-row">
+        <div class="byte-box wide result">
+         <small>
+          FLOAT32 × N²
+         </small>
+         <strong>
+          Matriz R
+         </strong>
+         <span>
+          Suma calculada en C
+         </span>
+        </div>
+       </div>
+      </div>
+      <div class="protocol-explain reveal">
+       <div class="number-highlight">
+        32
+        <span>
+         bits
+        </span>
+       </div>
+       <h3>
+        Un float = 4 bytes
+       </h3>
+       <p>
+        Java utiliza
+        <code>
+         writeFloat()
+        </code>
+        . C reconstruye los valores y adapta el orden de bytes mediante
+        <code>
+         ntohl()
+        </code>
+        y
+        <code>
+         htonl()
+        </code>
+        .
+       </p>
+       <div class="aside">
+        <strong>
+         Greatest
+        </strong>
+        <p>
+         Envía código 2, longitud M y M números float. Recibe un único float como respuesta.
+        </p>
+       </div>
+      </div>
+     </div>
+     <p class="note reveal">
+      El protocolo mostrado corresponde al código compartido por el equipo: matrices cuadradas N × N y conexión persistente durante el menú.
+     </p>
+    </div>
+   </section>
+   <section class="section pale" id="addition">
+    <div class="container">
+     <div class="section-heading reveal">
+      <span class="eyebrow dark">
+       04 / ALGORITMO INTERACTIVO
+      </span>
+      <h2>
+       Addition:
+       <em>
+        suma de matrices
+       </em>
+      </h2>
+      <p>
+       Selecciona un paso para observar cómo se suma cada par de posiciones. Los valores son ejemplos didácticos.
+      </p>
+     </div>
+     <div class="demo-layout reveal">
+      <div class="demo-main">
+       <div class="demo-top">
+        <span class="demo-label">
+         SIMULACIÓN · 2 × 2
+        </span>
+        <span class="step-count" id="additionStepLabel">
+         PASO 0 / 4
+        </span>
+       </div>
+       <div class="matrix-equation">
+        <div class="matrix-group">
+         <span>
+          MATRIZ A
+         </span>
+         <div class="matrix" id="matrixA">
+         </div>
+        </div>
+        <span class="math-symbol">
+         +
+        </span>
+        <div class="matrix-group">
+         <span>
+          MATRIZ B
+         </span>
+         <div class="matrix" id="matrixB">
+         </div>
+        </div>
+        <span class="math-symbol">
+         =
+        </span>
+        <div class="matrix-group">
+         <span>
+          RESULTADO
+         </span>
+         <div class="matrix result-matrix" id="matrixR">
+         </div>
+        </div>
+       </div>
+       <div class="demo-controls">
+        <button class="btn small outline" id="addReset">
+         ↺ Reiniciar
+        </button>
+        <button class="btn small primary" id="addNext">
+         Siguiente paso →
+        </button>
+       </div>
+      </div>
+      <aside class="demo-side">
+       <span class="aside-eyebrow">
+        ¿QUÉ OCURRE?
+       </span>
+       <h3 id="additionTitle">
+        Listos para comenzar
+       </h3>
+       <p id="additionExplain">
+        El servidor recibe dos matrices del mismo tamaño y calcula cada elemento de la matriz resultado.
+       </p>
+       <div class="formula" id="additionFormula">
+        R[i][j] = A[i][j] + B[i][j]
+       </div>
+       <p class="side-foot">
+        Esta animación explica el algoritmo; no ejecuta el servidor C.
+       </p>
+      </aside>
+     </div>
+    </div>
+   </section>
+   <section class="section navy" id="greatest">
+    <div class="container">
+     <div class="section-heading reveal">
+      <span class="eyebrow">
+       05 / ALGORITMO INTERACTIVO
+      </span>
+      <h2>
+       Greatest:
+       <em>
+        encontrar el máximo
+       </em>
+      </h2>
+      <p>
+       El servidor compara los valores de un vector y conserva el mayor encontrado hasta ese momento.
+      </p>
+     </div>
+     <div class="greatest-card reveal">
+      <div class="demo-top">
+       <span class="demo-label">
+        VECTOR · 5 ELEMENTOS
+       </span>
+       <span class="step-count" id="greatestStepLabel">
+        PASO 1 / 5
+       </span>
+      </div>
+      <div class="vector" id="vector">
+      </div>
+      <div class="greatest-bottom">
+       <div>
+        <small>
+         MAYOR ENCONTRADO
+        </small>
+        <div class="big-result" id="maxValue">
+         10
+        </div>
+       </div>
+       <div class="compare-box">
+        <small>
+         COMPARACIÓN ACTUAL
+        </small>
+        <p id="compareText">
+         Comenzamos con el primer elemento.
+        </p>
+       </div>
+      </div>
+      <div class="demo-controls">
+       <button class="btn small outline" id="maxReset">
+        ↺ Reiniciar
+       </button>
+       <button class="btn small primary" id="maxNext">
+        Siguiente paso →
+       </button>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section class="section light" id="codigo">
+    <div class="container">
+     <div class="section-heading reveal">
+      <span class="eyebrow dark">
+       06 / IMPLEMENTACIÓN
+      </span>
+      <h2>
+       Del concepto
+       <em>
+        al código
+       </em>
+      </h2>
+      <p>
+       Fragmentos simplificados de las funciones centrales del proyecto compartido por el equipo.
+      </p>
+     </div>
+     <div class="code-grid">
+      <article class="code-card reveal">
+       <div class="code-head">
+        <span class="code-dot red">
+        </span>
+        <span class="code-dot yellow">
+        </span>
+        <span class="code-dot green">
+        </span>
+        <strong>
+         Client_v1_0.java
+        </strong>
+       </div>
+       <pre><code>// Enviar operación y tamaño
+out.writeInt(1);
+out.writeInt(n);
+
+// Enviar cada float de las matrices
+sendMatrix(out, a);
+sendMatrix(out, b);
+out.flush();
+
+// Recibir el resultado
+readMatrix(in, result);</code></pre>
+       <p>
+        El cliente empaqueta la solicitud y espera los datos que devuelve C.
+       </p>
+      </article>
+      <article class="code-card reveal">
+       <div class="code-head">
+        <span class="code-dot red">
+        </span>
+        <span class="code-dot yellow">
+        </span>
+        <span class="code-dot green">
+        </span>
+        <strong>
+         server_v1.0.c
+        </strong>
+       </div>
+       <pre><code>// Sumar matrices aplanadas
+void addition(const float *a,
+              const float *b,
+              float *r, int n) {
+    int total = n * n;
+    for (int i = 0; i &lt; total; i++) {
+        r[i] = a[i] + b[i];
+    }
+}</code></pre>
+       <p>
+        El servidor calcula cada posición y prepara la matriz de respuesta.
+       </p>
+      </article>
+     </div>
+     <div class="technical-note reveal">
+      <strong>
+       Detalle del servidor del equipo
+      </strong>
+      <p>
+       La implementación utiliza
+       <code>
+        fork()
+       </code>
+       para atender clientes en procesos separados, además de funciones de lectura y escritura completas. Es una característica adicional, no necesaria para comprender las dos operaciones.
+      </p>
+     </div>
+    </div>
+   </section>
+   <section class="section closing" id="cierre">
+    <div class="container closing-inner reveal">
+     <span class="eyebrow">
+      07 / CONCLUSIONES
+     </span>
+     <h2>
+      Una arquitectura sencilla.
+      <br/>
+      <em>
+       Un principio fundamental.
+      </em>
+     </h2>
+     <p>
+      Dos programas escritos en lenguajes distintos pueden colaborar si comparten un protocolo. Java solicita, TCP transporta y C calcula.
+     </p>
+     <div class="closing-points">
+      <span>
+       Interoperabilidad
+      </span>
+      <span>
+       Comunicación binaria
+      </span>
+      <span>
+       Servicios remotos
+      </span>
+     </div>
+     <a class="btn primary" href="#inicio">
+      Volver al inicio ↑
+     </a>
+     <p class="closing-note">
+      Proyecto académico · Simulaciones explicativas independientes del servidor real.
+     </p>
+    </div>
+   </section>
+  </main>
+  <div aria-live="polite" class="present-help" id="presentHelp">
+   Modo presentación activo · ← → para navegar · Esc para salir
+  </div>
+  <script src="script.js">
+  </script>
+ </body>
+</html>
+

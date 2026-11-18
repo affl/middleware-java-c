@@ -144,6 +144,8 @@ float greatest(const float *v, int m) {
  */
 void handle_client(int client_sock) {
     int32_t op;
+    printf("Cliente conectado.\n");
+    fflush(stdout);
     while (1) {
         // Lee el código de la operación que solicita el cliente
         if (read_int(client_sock, &op) < 0) break;
@@ -152,6 +154,8 @@ void handle_client(int client_sock) {
             int32_t n;
             // Lee y valida la dimensión de la matriz
             if (read_int(client_sock, &n) < 0 || n <= 0 || n > 1000) break;
+            printf("Atendiendo solicitud: Addition (%d x %d)\n", n, n);
+            fflush(stdout);
 
             size_t elements = (size_t)n * n;
             // Reserva de memoria contigua para las matrices A, B y R
@@ -182,11 +186,15 @@ void handle_client(int client_sock) {
 
             // Liberación limpia de recursos en el heap
             free(a); free(b); free(r);
+            printf("Solicitud completada.\n");
+            fflush(stdout);
 
         } else if (op == 2) { /* Elemento Máximo */
             int32_t m;
             // Lee y valida la longitud del vector
             if (read_int(client_sock, &m) < 0 || m <= 0 || m > 100000) break;
+            printf("Atendiendo solicitud: Greatest (%d elementos)\n", m);
+            fflush(stdout);
 
             float *v = (float *)malloc(m * sizeof(float));
             if (!v) break;
@@ -203,12 +211,16 @@ void handle_client(int client_sock) {
 
             // Responder con la respuesta escalar de 32 bits
             if (write_float(client_sock, res) < 0) break;
+            printf("Solicitud completada.\n");
+            fflush(stdout);
 
         } else {
             // Opción inválida o solicitud de desconexión
             break;
         }
     }
+    printf("Cliente desconectado.\n");
+    fflush(stdout);
     close(client_sock); // Cierra el socket del cliente al salir del bucle
 }
 

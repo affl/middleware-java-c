@@ -1,8 +1,4 @@
 /*
- * INTEGRANTES:
- * Daniel Alejandro Guerrero Lopez
- * Jose Manuel Nava Cervantes
- * Carlos Manuel Villaseñor Vazquez
  * Anastacio Favián Flores Lira
  * Sistemas Distribuidos
  * Actividad: Proyecto Integrador - (Cliente)

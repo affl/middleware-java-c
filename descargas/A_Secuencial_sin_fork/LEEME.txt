@@ -1,0 +1,65 @@
+PROYECTO INTEGRADOR - SISTEMAS DISTRIBUIDOS
+DOS PROPUESTAS: SERVIDOR SECUENCIAL Y SERVIDOR CON fork()
+
+CARPETAS
+A_Secuencial_sin_fork
+  Cliente.java
+  Servidor.c
+  LEEME.txt
+
+B_Concurrente_con_fork
+  Cliente.java
+  Servidor.c
+  LEEME.txt
+
+DIFERENCIA
+A: El servidor atiende una conexion a la vez. Cuando el cliente elige
+Exit, termina esa atencion y el servidor acepta otra conexion.
+B: El servidor crea un proceso hijo con fork() para cada conexion.
+El proceso principal puede aceptar otro cliente mientras el hijo trabaja.
+
+COMPILAR Y EJECUTAR PROPUESTA A (MAC)
+Terminal 1:
+  cd A_Secuencial_sin_fork
+  clang -Wall -Wextra Servidor.c -o servidor
+  ./servidor
+
+Terminal 2:
+  cd A_Secuencial_sin_fork
+  javac Cliente.java
+  java Cliente
+
+PROPUESTA B
+Repetir los comandos desde B_Concurrente_con_fork.
+
+PRUEBA ADDITION
+Elegir 1, tamaño 2.
+Matriz A: 1 2 3 4
+Matriz B: 5 6 7 8
+Resultado:
+6 8
+10 12
+
+PRUEBA GREATEST
+Elegir 2, tamaño 5.
+Vector: 10 25 8 40 15
+Resultado: 40
+
+Elegir 3 para salir.
+
+DATOS IMPORTANTES
+- Cliente y servidor usan el puerto 5001.
+- 127.0.0.1 significa que ambos programas corren en la misma computadora.
+- Para usar dos computadoras, cambiar SERVIDOR en Cliente.java por la IP
+  de la computadora donde se ejecuta el servidor.
+- DataOutputStream escribe enteros y float como datos binarios.
+- C convierte los bytes al orden de red con htonl/ntohl.
+- recibirTodo y enviarTodo repiten recv/send porque TCP puede entregar
+  o enviar los datos en partes.
+- Las matrices se transmiten por filas, como una secuencia de float.
+- El cliente implementa los dos metodos print solicitados.
+- Se limita la matriz a 50 x 50 y el vector a 10000 elementos.
+
+NOTA DE IMPLEMENTACION: El servidor reserva arreglos de tamaño fijo para
+las matrices (hasta 50 x 50) y el vector (hasta 10000 valores). Esto evita
+agregar manejo dinamico de memoria y mantiene el ejemplo mas directo.

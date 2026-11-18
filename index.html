@@ -5,7 +5,10 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="#0c2638" name="theme-color"/>
-  <title>Middleware | Java ↔ C por TCP</title>
+  <meta content="Anastacio Favián Flores Lira" name="author"/>
+  <title>
+   Middleware | Java ↔ C por TCP
+  </title>
   <link href="styles.css" rel="stylesheet"/>
  </head>
  <body>
@@ -43,6 +46,9 @@
     </a>
     <a href="#codigo">
      Código
+    </a>
+    <a href="#descargas">
+     Descargas
     </a>
     <a href="#cierre">
      Cierre
@@ -100,24 +106,11 @@
         C SERVER
        </span>
       </div>
-      <div class="team-panel">
-       <span class="team-kicker">
-        INTEGRANTES DEL EQUIPO
-       </span>
-       <ul class="team-list">
-        <li>
-         Daniel Alejandro Guerrero López
-        </li>
-        <li>
-         Carlos Manuel Villaseñor Vázquez
-        </li>
-        <li>
-         José Manuel Nava Cervantes
-        </li>
-        <li>
-         Anastacio Favián Flores Lira
-        </li>
-       </ul>
+      <div class="author-panel">
+       <span class="author-kicker">PROYECTO INDIVIDUAL</span>
+       <span class="author-label">Desarrollado por</span>
+       <strong>Anastacio Favián Flores Lira</strong>
+       <span class="author-detail">Sistemas Distribuidos · Proyecto final</span>
       </div>
      </div>
      <div aria-label="Esquema animado de comunicación entre Java y C" class="hero-visual reveal">
@@ -263,7 +256,7 @@
         JAVA
        </div>
        <h3>
-        Client_v1_0.java
+        Cliente.java
        </h3>
        <p>
         Menú, captura de matrices y vectores, envío de datos y visualización del resultado.
@@ -285,7 +278,7 @@
         </small>
        </div>
        <div class="tcp-pill">
-        TCP · PUERTO 5000
+        TCP · PUERTO 5001
        </div>
        <div class="arch-flow return">
         <span>
@@ -304,7 +297,7 @@
         C
        </div>
        <h3>
-        server_v1.0.c
+        Servidor.c
        </h3>
        <p>
         Recibe bytes, reconstruye los números, ejecuta la operación y devuelve el resultado.
@@ -463,7 +456,7 @@
       </div>
      </div>
      <p class="note reveal">
-      El protocolo mostrado corresponde al código compartido por el equipo: matrices cuadradas N × N y conexión persistente durante el menú.
+      El protocolo de esta implementación individual utiliza matrices cuadradas N × N y mantiene la conexión durante el menú.
      </p>
     </div>
    </section>
@@ -620,7 +613,7 @@
        </em>
       </h2>
       <p>
-       Fragmentos simplificados de las funciones centrales del proyecto compartido por el equipo.
+       Fragmentos de la implementación individual: Java envía los datos y C realiza las operaciones.
       </p>
      </div>
      <div class="code-grid">
@@ -633,20 +626,19 @@
         <span class="code-dot green">
         </span>
         <strong>
-         Client_v1_0.java
+         Cliente.java
         </strong>
        </div>
-       <pre><code>// Enviar operación y tamaño
-out.writeInt(1);
-out.writeInt(n);
+       <pre><code>// Identificar Addition y enviar la dimension
+salida.writeInt(1);
+salida.writeInt(n);
 
-// Enviar cada float de las matrices
-sendMatrix(out, a);
-sendMatrix(out, b);
-out.flush();
+// Enviar los valores como float binarios
+salida.writeFloat(a[i][j]);
+salida.flush();
 
-// Recibir el resultado
-readMatrix(in, result);</code></pre>
+// Recibir cada valor del resultado
+r[i][j] = entrada.readFloat();</code></pre>
        <p>
         El cliente empaqueta la solicitud y espera los datos que devuelve C.
        </p>
@@ -660,16 +652,16 @@ readMatrix(in, result);</code></pre>
         <span class="code-dot green">
         </span>
         <strong>
-         server_v1.0.c
+         Servidor.c
         </strong>
        </div>
-       <pre><code>// Sumar matrices aplanadas
-void addition(const float *a,
-              const float *b,
-              float *r, int n) {
-    int total = n * n;
-    for (int i = 0; i &lt; total; i++) {
-        r[i] = a[i] + b[i];
+       <pre><code>// Sumar matrices elemento por elemento
+void addition(int n, float a[n][n],
+              float b[n][n], float r[n][n]) {
+    for (int i = 0; i &lt; n; i++) {
+        for (int j = 0; j &lt; n; j++) {
+            r[i][j] = a[i][j] + b[i][j];
+        }
     }
 }</code></pre>
        <p>
@@ -679,14 +671,83 @@ void addition(const float *a,
      </div>
      <div class="technical-note reveal">
       <strong>
-       Detalle del servidor del equipo
+       Decisión de implementación
       </strong>
       <p>
-       La implementación utiliza
-       <code>
-        fork()
-       </code>
-       para atender clientes en procesos separados, además de funciones de lectura y escritura completas. Es una característica adicional, no necesaria para comprender las dos operaciones.
+       Esta versión utiliza un servidor iterativo: atiende una conexión a la vez y permanece en un ciclo esperando nuevas solicitudes. No necesita
+       <code>fork()</code>
+       para cumplir los requisitos funcionales del proyecto.
+      </p>
+     </div>
+    </div>
+   </section>
+   <section class="section pale" id="descargas">
+    <div class="container">
+     <div class="section-heading reveal">
+      <span class="eyebrow dark">07 / ARCHIVOS DEL PROYECTO</span>
+      <h2>
+       Elige una versión.
+       <em>Descarga y prueba el código.</em>
+      </h2>
+      <p>
+       Hay dos implementaciones del mismo sistema cliente-servidor. Ambas utilizan Java, C y sockets TCP; la diferencia está en la manera en que el servidor atiende las conexiones.
+      </p>
+     </div>
+
+     <div class="download-grid">
+      <article class="download-card featured reveal">
+       <div class="download-topline">
+        <span class="download-icon">A</span>
+        <span class="download-badge">VERSIÓN RECOMENDADA</span>
+       </div>
+       <h3>Servidor secuencial · Sin fork()</h3>
+       <p>
+        El servidor atiende una conexión a la vez y continúa esperando nuevas solicitudes. Es la alternativa más sencilla para estudiar y explicar el funcionamiento básico.
+       </p>
+       <div class="download-files">
+        <span>Cliente.java</span>
+        <span>Servidor.c</span>
+        <span>LEEME.txt</span>
+       </div>
+       <a class="btn primary download-main" href="#" download>
+        Descargar proyecto A <span>↓</span>
+       </a>
+       <div class="download-file-links version-files">
+        <a href="#" download><span>Java</span> Cliente.java <b>↓</b></a>
+        <a href="#" download><span>C</span> Servidor.c <b>↓</b></a>
+        <a href="descargas/A_Secuencial_sin_fork/LEEME.txt" download><span>TXT</span> Instrucciones <b>↓</b></a>
+       </div>
+      </article>
+
+      <article class="download-card reveal">
+       <div class="download-topline">
+        <span class="download-icon secondary">B</span>
+        <span class="download-badge neutral">VERSIÓN CONCURRENTE</span>
+       </div>
+       <h3>Servidor concurrente · Con fork()</h3>
+       <p>
+        El servidor crea un proceso hijo para atender cada conexión aceptada, mientras el proceso principal puede continuar aceptando otras conexiones.
+       </p>
+       <div class="download-files">
+        <span>Cliente.java</span>
+        <span>Servidor.c</span>
+        <span>LEEME.txt</span>
+       </div>
+       <a class="btn primary download-main" href="descargas/Proyecto_B_Concurrente_Con_Fork.zip" download>
+        Descargar proyecto B <span>↓</span>
+       </a>
+       <div class="download-file-links version-files">
+        <a href="#" download><span>Java</span> Cliente.java <b>↓</b></a>
+        <a href="#" download><span>C</span> Servidor.c <b>↓</b></a>
+        <a href="descargas/B_Concurrente_con_fork/LEEME.txt" download><span>TXT</span> Instrucciones <b>↓</b></a>
+       </div>
+      </article>
+     </div>
+
+     <div class="download-note reveal">
+      <strong>¿Cómo probar los proyectos?</strong>
+      <p>
+       Descarga el ZIP de la versión que quieras probar y descomprímelo. En una terminal compila y ejecuta Servidor.c; en una segunda terminal compila y ejecuta Cliente.java. GitHub Pages permite descargar los archivos, pero no ejecutar programas C o Java ni abrir conexiones TCP desde el navegador. Consulta el archivo LEEME.txt incluido en cada paquete.
       </p>
      </div>
     </div>
@@ -694,7 +755,7 @@ void addition(const float *a,
    <section class="section closing" id="cierre">
     <div class="container closing-inner reveal">
      <span class="eyebrow">
-      07 / CONCLUSIONES
+      08 / CONCLUSIONES
      </span>
      <h2>
       Una arquitectura sencilla.
@@ -721,7 +782,7 @@ void addition(const float *a,
       Volver al inicio ↑
      </a>
      <p class="closing-note">
-      Proyecto académico · Simulaciones explicativas independientes del servidor real.
+      Proyecto individual · Anastacio Favián Flores Lira · Sistemas Distribuidos.
      </p>
     </div>
    </section>

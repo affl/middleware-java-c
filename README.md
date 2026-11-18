@@ -1,32 +1,43 @@
-# Presentación web: Middleware · Java / TCP / C
+# Middleware · Java / TCP / C
+
+Presentación web individual del proyecto de Sistemas Distribuidos.
 
 ## Publicación en GitHub Pages
 
-1. Crea un repositorio público en GitHub (por ejemplo, `middleware-java-c`).
-2. Sube `index.html`, `styles.css` y `script.js` directamente a la raíz del repositorio.
-3. En Settings > Pages, selecciona Deploy from a branch, `main` y `/ (root)`.
-4. Guarda y espera a que GitHub publique la URL del sitio.
+1. Descomprime este paquete.
+2. Sube `index.html`, `styles.css`, `script.js`, `README.md` y la carpeta `descargas/` a la raíz del repositorio.
+3. En GitHub, abre Settings > Pages.
+4. Selecciona Deploy from a branch, rama `main` y carpeta `/ (root)`.
+5. Guarda y espera la publicación.
 
-## Uso local
+## Descargas incluidas
 
-Abre `index.html` en Chrome, Safari o Firefox. No necesitas instalar dependencias.
+La sección Descargas ofrece dos implementaciones completas:
 
-## Estructura
+- **Proyecto A — Servidor secuencial sin fork():** `descargas/Proyecto_A_Secuencial_Sin_Fork.zip`
+- **Proyecto B — Servidor concurrente con fork():** `descargas/Proyecto_B_Concurrente_Con_Fork.zip`
 
-- `index.html`: contenido de la presentación y componentes visuales.
-- `styles.css`: diseño, animaciones, colores y adaptación a móviles.
-- `script.js`: menú, modo presentación y simulaciones de Addition y Greatest.
+Cada ZIP incluye `Cliente.java`, `Servidor.c` y `LEEME.txt`. También se puede descargar cada archivo individual desde su respectiva carpeta.
 
-## Importante
+## Probar los proyectos
 
-Las operaciones de Addition y Greatest en esta página son SIMULACIONES DIDÁCTICAS
-implementadas en JavaScript. Esta versión NO ejecuta Java ni C y NO realiza
-comunicación TCP real. Para demostrar el proyecto ejecutable se utilizan los
-programas Java y C por separado.
+GitHub Pages es un servicio de alojamiento estático. Permite consultar la presentación y descargar los archivos, pero no ejecuta Java o C ni establece sockets TCP desde el navegador.
 
-## Controles
+Para probar cualquiera de las versiones:
+1. Descarga el ZIP correspondiente y descomprímelo.
+2. Abre una terminal en la carpeta extraída.
+3. Compila y ejecuta el servidor C:
+   `clang Servidor.c -o servidor`
+   `./servidor`
+4. Abre una segunda terminal en la misma carpeta, compila y ejecuta el cliente:
+   `javac Cliente.java`
+   `java Cliente`
 
-- Usa el menú superior para ir a cada tema.
-- En «Presentar», usa flechas izquierda/derecha o RePág/AvPág.
-- Pulsa Esc para salir del modo presentación.
-- En las simulaciones, usa «Siguiente paso» y «Reiniciar».
+Consulta el `LEEME.txt` de cada proyecto para sus detalles.
+
+## Estructura de descargas
+
+- `descargas/Proyecto_A_Secuencial_Sin_Fork.zip`
+- `descargas/Proyecto_B_Concurrente_Con_Fork.zip`
+- `descargas/A_Secuencial_sin_fork/` — archivos individuales de A
+- `descargas/B_Concurrente_con_fork/` — archivos individuales de B

@@ -1387,40 +1387,6 @@ code {
 
 }
 
-
-/* Identificación del autor del proyecto individual. */
-.author-panel {
-    margin-top: 1.5rem;
-    padding: 1.05rem 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: .35rem;
-    background: rgba(19,57,77,.72);
-    border: 1px solid rgba(94,205,207,.24);
-    border-radius: 16px;
-    max-width: 650px;
-}
-.author-kicker {
-    color: #6ee5db;
-    font-size: .69rem;
-    letter-spacing: .14em;
-    font-weight: 800;
-    margin-bottom: .35rem;
-}
-.author-label {
-    color: #9dbac8;
-    font-size: .75rem;
-}
-.author-panel strong {
-    color: #f2fbff;
-    font-size: 1rem;
-    letter-spacing: .01em;
-}
-.author-detail {
-    color: #a9c5d1;
-    font-size: .76rem;
-}
-
 /* Tarjetas de descarga para los archivos fuente. */
 .download-grid {
     display: grid;
@@ -1557,21 +1523,4 @@ code {
     .download-grid {
         grid-template-columns: 1fr;
     }
-}
-
-
-/* Separación visual entre el ZIP de cada versión y sus archivos individuales. */
-.version-files {
-    margin-top: 18px;
-    padding-top: 16px;
-    border-top: 1px solid var(--line);
-}
-.version-files a {
-    background: rgba(255,255,255,.72);
-}
-.download-card.featured .version-files a {
-    background: rgba(255,255,255,.82);
-}
-.download-card .download-main {
-    margin-top: 2px;
 }

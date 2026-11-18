@@ -1,43 +1,20 @@
-# Middleware · Java / TCP / C
+# Middleware Java / TCP / C — Proyecto en equipo
 
-Presentación web individual del proyecto de Sistemas Distribuidos.
+La landing page conserva la presentación original, los cuatro integrantes y las secciones explicativas.
 
-## Publicación en GitHub Pages
+## Archivos descargables
 
-1. Descomprime este paquete.
-2. Sube `index.html`, `styles.css`, `script.js`, `README.md` y la carpeta `descargas/` a la raíz del repositorio.
-3. En GitHub, abre Settings > Pages.
-4. Selecciona Deploy from a branch, rama `main` y carpeta `/ (root)`.
-5. Guarda y espera la publicación.
+En `descargas/` se incluyen los archivos originales del proyecto:
 
-## Descargas incluidas
+- `Client_v1_0.java` — cliente Java
+- `server_v1.0.c` — servidor C con `fork()`
+- `LEEME.txt` — instrucciones de ejecución
+- `Middleware_Proyecto_Original_Equipo.zip` — los tres archivos en un solo ZIP
 
-La sección Descargas ofrece dos implementaciones completas:
+Se mantienen los cambios previos de puerto a **5001** en ambos archivos para evitar el conflicto del puerto 5000 en macOS. No se sustituyeron por las versiones simplificadas A/B.
 
-- **Proyecto A — Servidor secuencial sin fork():** `descargas/Proyecto_A_Secuencial_Sin_Fork.zip`
-- **Proyecto B — Servidor concurrente con fork():** `descargas/Proyecto_B_Concurrente_Con_Fork.zip`
+## Publicar en GitHub Pages
 
-Cada ZIP incluye `Cliente.java`, `Servidor.c` y `LEEME.txt`. También se puede descargar cada archivo individual desde su respectiva carpeta.
+Sube `index.html`, `styles.css`, `script.js`, `README.md` y la carpeta `descargas/` a la raíz del repositorio existente. Sustituye los archivos previos y elimina las descargas de las propuestas A/B si todavía están publicadas.
 
-## Probar los proyectos
-
-GitHub Pages es un servicio de alojamiento estático. Permite consultar la presentación y descargar los archivos, pero no ejecuta Java o C ni establece sockets TCP desde el navegador.
-
-Para probar cualquiera de las versiones:
-1. Descarga el ZIP correspondiente y descomprímelo.
-2. Abre una terminal en la carpeta extraída.
-3. Compila y ejecuta el servidor C:
-   `clang Servidor.c -o servidor`
-   `./servidor`
-4. Abre una segunda terminal en la misma carpeta, compila y ejecuta el cliente:
-   `javac Cliente.java`
-   `java Cliente`
-
-Consulta el `LEEME.txt` de cada proyecto para sus detalles.
-
-## Estructura de descargas
-
-- `descargas/Proyecto_A_Secuencial_Sin_Fork.zip`
-- `descargas/Proyecto_B_Concurrente_Con_Fork.zip`
-- `descargas/A_Secuencial_sin_fork/` — archivos individuales de A
-- `descargas/B_Concurrente_con_fork/` — archivos individuales de B
+La presentación incluye simulaciones explicativas; para ejecutar los programas reales, descarga el código y sigue `LEEME.txt`.
